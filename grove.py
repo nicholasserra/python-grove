@@ -10,6 +10,9 @@ except ImportError:
     except ImportError:
         from django.utils import simplejson as json
 
+class GroveException(Exception):
+    pass
+
 class GroveUnauthorized(Exception):
     pass
 
@@ -131,5 +134,10 @@ class GroveConnection(object):
 
         content = response.read()
         response.close()
-        parsed = json.loads(content)
+        
+        try:
+            parsed = json.loads(content)
+        except ValueError:
+            raise GroveException('Invalid JSON, unable to parse response.')
+        
         return parsed
