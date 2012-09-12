@@ -9,5 +9,5 @@ pip install python-grove
 #Usage
 ```python
 import grove
-g = grove.GroveConnection()
+g = grove.GroveConnection('username', 'password')
 ```
